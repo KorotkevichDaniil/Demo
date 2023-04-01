@@ -1,0 +1,429 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="JeweleryModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Единицы_измерения">
+    <Key>
+      <PropertyRef Name="Код" />
+    </Key>
+    <Property Name="Код" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Наименование" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Продукция" Relationship="Self.FK_Продукция_Единицы_измерения" FromRole="Единицы_измерения" ToRole="Продукция" />
+  </EntityType>
+  <EntityType Name="Заказы">
+    <Key>
+      <PropertyRef Name="Код" />
+    </Key>
+    <Property Name="Код" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Дата_заказа" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Дата_доставки" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Пункт_выдачи" Type="Byte" Nullable="false" />
+    <Property Name="Код_клиента" Type="Byte" />
+    <Property Name="Код_для_получения" Type="Byte" Nullable="false" />
+    <Property Name="Статус_заказа" Type="Byte" Nullable="false" />
+    <Property Name="Стоимость" Type="Decimal" Precision="18" Scale="2" />
+    <NavigationProperty Name="Пользователи" Relationship="Self.FK_Заказы_Пользователи" FromRole="Заказы" ToRole="Пользователи" />
+    <NavigationProperty Name="Пункты_выдачи" Relationship="Self.FK_Заказы_Пункты_выдачи" FromRole="Заказы" ToRole="Пункты_выдачи" />
+    <NavigationProperty Name="Статусы" Relationship="Self.FK_Заказы_Статусы" FromRole="Заказы" ToRole="Статусы" />
+    <NavigationProperty Name="Состав_заказов" Relationship="Self.FK_Состав_заказов_Заказы" FromRole="Заказы" ToRole="Состав_заказов" />
+  </EntityType>
+  <EntityType Name="Категории">
+    <Key>
+      <PropertyRef Name="Код" />
+    </Key>
+    <Property Name="Код" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Наименование" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Продукция" Relationship="Self.FK_Продукция_Категории" FromRole="Категории" ToRole="Продукция" />
+  </EntityType>
+  <EntityType Name="Пользователи">
+    <Key>
+      <PropertyRef Name="Код" />
+    </Key>
+    <Property Name="Код" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Фамилия" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Имя" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Отчество" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Логин" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Пароль" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Роль" Type="Byte" Nullable="false" />
+    <NavigationProperty Name="Заказы" Relationship="Self.FK_Заказы_Пользователи" FromRole="Пользователи" ToRole="Заказы" />
+    <NavigationProperty Name="Роли" Relationship="Self.FK_Пользователи_Роли" FromRole="Пользователи" ToRole="Роли" />
+  </EntityType>
+  <EntityType Name="Поставщики">
+    <Key>
+      <PropertyRef Name="Код" />
+    </Key>
+    <Property Name="Код" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Наименование" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Юрид_адрес" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="ИНН" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="КПП" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ФИО_директора" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Телефон" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Почта" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Продукция" Relationship="Self.FK_Продукция_Поставщики" FromRole="Поставщики" ToRole="Продукция" />
+  </EntityType>
+  <EntityType Name="Продукция">
+    <Key>
+      <PropertyRef Name="Артикул" />
+    </Key>
+    <Property Name="Артикул" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Наименование" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Единица_измерения" Type="Byte" Nullable="false" />
+    <Property Name="Стоимость" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Размер_максимально_возможной_скидки" Type="Byte" Nullable="false" />
+    <Property Name="Производитель" Type="Byte" Nullable="false" />
+    <Property Name="Поставщик" Type="Byte" Nullable="false" />
+    <Property Name="Категория_товара" Type="Byte" Nullable="false" />
+    <Property Name="Действующая_скидка" Type="Byte" Nullable="false" />
+    <Property Name="Кол_во_на_складе" Type="Byte" Nullable="false" />
+    <Property Name="Описание" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Изображение" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Единицы_измерения" Relationship="Self.FK_Продукция_Единицы_измерения" FromRole="Продукция" ToRole="Единицы_измерения" />
+    <NavigationProperty Name="Категории" Relationship="Self.FK_Продукция_Категории" FromRole="Продукция" ToRole="Категории" />
+    <NavigationProperty Name="Поставщики" Relationship="Self.FK_Продукция_Поставщики" FromRole="Продукция" ToRole="Поставщики" />
+    <NavigationProperty Name="Производители" Relationship="Self.FK_Продукция_Производители" FromRole="Продукция" ToRole="Производители" />
+    <NavigationProperty Name="Состав_заказов" Relationship="Self.FK_Состав_заказов_Продукция" FromRole="Продукция" ToRole="Состав_заказов" />
+  </EntityType>
+  <EntityType Name="Производители">
+    <Key>
+      <PropertyRef Name="Код" />
+    </Key>
+    <Property Name="Код" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Наименование" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Продукция" Relationship="Self.FK_Продукция_Производители" FromRole="Производители" ToRole="Продукция" />
+  </EntityType>
+  <EntityType Name="Пункты_выдачи">
+    <Key>
+      <PropertyRef Name="Код" />
+    </Key>
+    <Property Name="Код" Type="Byte" Nullable="false" />
+    <Property Name="Индекс" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Адрес" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Заказы" Relationship="Self.FK_Заказы_Пункты_выдачи" FromRole="Пункты_выдачи" ToRole="Заказы" />
+  </EntityType>
+  <EntityType Name="Роли">
+    <Key>
+      <PropertyRef Name="Код" />
+    </Key>
+    <Property Name="Код" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Роль" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Пользователи" Relationship="Self.FK_Пользователи_Роли" FromRole="Роли" ToRole="Пользователи" />
+  </EntityType>
+  <EntityType Name="Состав_заказов">
+    <Key>
+      <PropertyRef Name="Номер" />
+    </Key>
+    <Property Name="Номер" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Номер_заказа" Type="Byte" Nullable="false" />
+    <Property Name="Артикул_продукции" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Количество" Type="Byte" Nullable="false" />
+    <NavigationProperty Name="Заказы" Relationship="Self.FK_Состав_заказов_Заказы" FromRole="Состав_заказов" ToRole="Заказы" />
+    <NavigationProperty Name="Продукция" Relationship="Self.FK_Состав_заказов_Продукция" FromRole="Состав_заказов" ToRole="Продукция" />
+  </EntityType>
+  <EntityType Name="Статусы">
+    <Key>
+      <PropertyRef Name="Код" />
+    </Key>
+    <Property Name="Код" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Наименование" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Заказы" Relationship="Self.FK_Заказы_Статусы" FromRole="Статусы" ToRole="Заказы" />
+  </EntityType>
+  <EntityType Name="VW_ProdutsDetails">
+    <Key>
+      <PropertyRef Name="Артикул" />
+      <PropertyRef Name="Наименование" />
+      <PropertyRef Name="Количество_на_складе" />
+      <PropertyRef Name="Стоимость" />
+      <PropertyRef Name="Максимальная_скидка" />
+      <PropertyRef Name="Действующая_скидка" />
+      <PropertyRef Name="Категория_товара" />
+    </Key>
+    <Property Name="Артикул" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Наименование" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Количество_на_складе" Type="Byte" Nullable="false" />
+    <Property Name="Стоимость" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Максимальная_скидка" Type="Byte" Nullable="false" />
+    <Property Name="Действующая_скидка" Type="Byte" Nullable="false" />
+    <Property Name="Категория_товара" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Описание" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FK_Продукция_Единицы_измерения">
+    <End Role="Единицы_измерения" Type="Self.Единицы_измерения" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Продукция" Type="Self.Продукция" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Единицы_измерения">
+        <PropertyRef Name="Код" />
+      </Principal>
+      <Dependent Role="Продукция">
+        <PropertyRef Name="Единица_измерения" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Заказы_Пользователи">
+    <End Role="Пользователи" Type="Self.Пользователи" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Заказы" Type="Self.Заказы" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Пользователи">
+        <PropertyRef Name="Код" />
+      </Principal>
+      <Dependent Role="Заказы">
+        <PropertyRef Name="Код_клиента" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Заказы_Пункты_выдачи">
+    <End Role="Пункты_выдачи" Type="Self.Пункты_выдачи" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Заказы" Type="Self.Заказы" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Пункты_выдачи">
+        <PropertyRef Name="Код" />
+      </Principal>
+      <Dependent Role="Заказы">
+        <PropertyRef Name="Пункт_выдачи" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Заказы_Статусы">
+    <End Role="Статусы" Type="Self.Статусы" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Заказы" Type="Self.Заказы" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Статусы">
+        <PropertyRef Name="Код" />
+      </Principal>
+      <Dependent Role="Заказы">
+        <PropertyRef Name="Статус_заказа" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Состав_заказов_Заказы">
+    <End Role="Заказы" Type="Self.Заказы" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Состав_заказов" Type="Self.Состав_заказов" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Заказы">
+        <PropertyRef Name="Код" />
+      </Principal>
+      <Dependent Role="Состав_заказов">
+        <PropertyRef Name="Номер_заказа" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Продукция_Категории">
+    <End Role="Категории" Type="Self.Категории" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Продукция" Type="Self.Продукция" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Категории">
+        <PropertyRef Name="Код" />
+      </Principal>
+      <Dependent Role="Продукция">
+        <PropertyRef Name="Категория_товара" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Пользователи_Роли">
+    <End Role="Роли" Type="Self.Роли" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Пользователи" Type="Self.Пользователи" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Роли">
+        <PropertyRef Name="Код" />
+      </Principal>
+      <Dependent Role="Пользователи">
+        <PropertyRef Name="Роль" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Продукция_Поставщики">
+    <End Role="Поставщики" Type="Self.Поставщики" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Продукция" Type="Self.Продукция" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Поставщики">
+        <PropertyRef Name="Код" />
+      </Principal>
+      <Dependent Role="Продукция">
+        <PropertyRef Name="Поставщик" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Продукция_Производители">
+    <End Role="Производители" Type="Self.Производители" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Продукция" Type="Self.Продукция" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Производители">
+        <PropertyRef Name="Код" />
+      </Principal>
+      <Dependent Role="Продукция">
+        <PropertyRef Name="Производитель" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Состав_заказов_Продукция">
+    <End Role="Продукция" Type="Self.Продукция" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Состав_заказов" Type="Self.Состав_заказов" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Продукция">
+        <PropertyRef Name="Артикул" />
+      </Principal>
+      <Dependent Role="Состав_заказов">
+        <PropertyRef Name="Артикул_продукции" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="JeweleryEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="Единицы_измерения" EntityType="Self.Единицы_измерения" />
+    <EntitySet Name="Заказы" EntityType="Self.Заказы" />
+    <EntitySet Name="Категории" EntityType="Self.Категории" />
+    <EntitySet Name="Пользователи" EntityType="Self.Пользователи" />
+    <EntitySet Name="Поставщики" EntityType="Self.Поставщики" />
+    <EntitySet Name="Продукция" EntityType="Self.Продукция" />
+    <EntitySet Name="Производители" EntityType="Self.Производители" />
+    <EntitySet Name="Пункты_выдачи" EntityType="Self.Пункты_выдачи" />
+    <EntitySet Name="Роли" EntityType="Self.Роли" />
+    <EntitySet Name="Состав_заказов" EntityType="Self.Состав_заказов" />
+    <EntitySet Name="Статусы" EntityType="Self.Статусы" />
+    <EntitySet Name="VW_ProdutsDetails" EntityType="Self.VW_ProdutsDetails" />
+    <AssociationSet Name="FK_Продукция_Единицы_измерения" Association="Self.FK_Продукция_Единицы_измерения">
+      <End Role="Единицы_измерения" EntitySet="Единицы_измерения" />
+      <End Role="Продукция" EntitySet="Продукция" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Заказы_Пользователи" Association="Self.FK_Заказы_Пользователи">
+      <End Role="Пользователи" EntitySet="Пользователи" />
+      <End Role="Заказы" EntitySet="Заказы" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Заказы_Пункты_выдачи" Association="Self.FK_Заказы_Пункты_выдачи">
+      <End Role="Пункты_выдачи" EntitySet="Пункты_выдачи" />
+      <End Role="Заказы" EntitySet="Заказы" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Заказы_Статусы" Association="Self.FK_Заказы_Статусы">
+      <End Role="Статусы" EntitySet="Статусы" />
+      <End Role="Заказы" EntitySet="Заказы" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Состав_заказов_Заказы" Association="Self.FK_Состав_заказов_Заказы">
+      <End Role="Заказы" EntitySet="Заказы" />
+      <End Role="Состав_заказов" EntitySet="Состав_заказов" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Продукция_Категории" Association="Self.FK_Продукция_Категории">
+      <End Role="Категории" EntitySet="Категории" />
+      <End Role="Продукция" EntitySet="Продукция" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Пользователи_Роли" Association="Self.FK_Пользователи_Роли">
+      <End Role="Роли" EntitySet="Роли" />
+      <End Role="Пользователи" EntitySet="Пользователи" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Продукция_Поставщики" Association="Self.FK_Продукция_Поставщики">
+      <End Role="Поставщики" EntitySet="Поставщики" />
+      <End Role="Продукция" EntitySet="Продукция" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Продукция_Производители" Association="Self.FK_Продукция_Производители">
+      <End Role="Производители" EntitySet="Производители" />
+      <End Role="Продукция" EntitySet="Продукция" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Состав_заказов_Продукция" Association="Self.FK_Состав_заказов_Продукция">
+      <End Role="Продукция" EntitySet="Продукция" />
+      <End Role="Состав_заказов" EntitySet="Состав_заказов" />
+    </AssociationSet>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(JeweleryModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(JeweleryModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+    <EntitySet Name="VW_ProductList" EntityType="JeweleryModel.VW_ProductList" />
+  </EntityContainer>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+  <EntityType Name="VW_ProductList">
+    <Key>
+      <PropertyRef Name="Артикул" />
+      <PropertyRef Name="Наименование" />
+      <PropertyRef Name="Единица_измерения" />
+      <PropertyRef Name="Стоимость" />
+      <PropertyRef Name="Размер_максимально_возможной_скидки" />
+      <PropertyRef Name="Производитель" />
+      <PropertyRef Name="Наименование_производителя" />
+      <PropertyRef Name="Поставщик" />
+      <PropertyRef Name="Наименование_поставщика" />
+      <PropertyRef Name="Категория_товара" />
+      <PropertyRef Name="Наименование_категории" />
+      <PropertyRef Name="Действующая_скидка" />
+      <PropertyRef Name="Кол_во_на_складе" />
+      <PropertyRef Name="Описание" />
+    </Key>
+    <Property Name="Артикул" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Наименование" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Единица_измерения" Type="Byte" Nullable="false" />
+    <Property Name="Стоимость" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="Размер_максимально_возможной_скидки" Type="Byte" Nullable="false" />
+    <Property Name="Производитель" Type="Byte" Nullable="false" />
+    <Property Name="Наименование_производителя" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Поставщик" Type="Byte" Nullable="false" />
+    <Property Name="Наименование_поставщика" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Категория_товара" Type="Byte" Nullable="false" />
+    <Property Name="Наименование_категории" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Действующая_скидка" Type="Byte" Nullable="false" />
+    <Property Name="Кол_во_на_складе" Type="Byte" Nullable="false" />
+    <Property Name="Описание" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Изображение" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+</Schema>

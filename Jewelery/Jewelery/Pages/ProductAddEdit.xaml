@@ -1,0 +1,49 @@
+﻿<Page x:Class="Jewelery.Pages.ProductAddEdit"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Jewelery.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ProductAddEdit">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Orientation="Vertical">
+            <Label Content="Артикул" Width="300" HorizontalContentAlignment="Center" Margin="0 5 0 0"/>
+            <Label Content="Наименование" Width="300" HorizontalContentAlignment="Center"/>
+            <Label Content="Единица измерения" Width="300" HorizontalContentAlignment="Center"/>
+            <Label Content="Стоимость" Width="300" HorizontalContentAlignment="Center"/>
+            <Label Content="Максимальная скидка" Width="300" HorizontalContentAlignment="Center"/>
+            <Label Content="Производитель" Width="300" HorizontalContentAlignment="Center"/>
+            <Label Content="Поставщик" Width="300" HorizontalContentAlignment="Center"/>
+            <Label Content="Категория" Width="300" HorizontalContentAlignment="Center"/>
+            <Label Content="Действующая скидка" Width="300" HorizontalContentAlignment="Center"/>
+            <Label Content="Количество на складе" Width="300" HorizontalContentAlignment="Center"/>
+            <Label Content="Описание" Width="300" HorizontalContentAlignment="Center"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Vertical" Grid.Column="1" Margin="0 5 0 0">
+            <TextBox x:Name="txtArticle" Height="35"/>
+            <TextBox x:Name="txtName" Height="35" Margin="0 5 0 0"/>
+            <ComboBox x:Name="cmbUnit" Height="35" Margin="0 5 0 0" DisplayMemberPath="Наименование"/>
+            <TextBox x:Name="txtPrice" Height="35" Margin="0 5 0 0"/>
+            <TextBox x:Name="txtMaxSale" Height="35" Margin="0 5 0 0"/>
+            <ComboBox x:Name="cmbManufacture" Height="35" Margin="0 5 0 0" DisplayMemberPath="Наименование"/>
+            <ComboBox x:Name="cmbPostavshik" Height="35" Margin="0 5 0 0" DisplayMemberPath="Наименование"/>
+            <ComboBox x:Name="cmbCategory" Height="35" Margin="0 5 0 0" DisplayMemberPath="Наименование"/>
+            <TextBox x:Name="txtSale" Height="35" Margin="0 5 0 0"/>
+            <TextBox x:Name="txtCount" Height="35" Margin="0 5 0 0"/>
+            <TextBox x:Name="txtDescription" Height="35" Margin="0 5 0 0"/>
+        </StackPanel>
+
+        <Button Grid.Column="2" VerticalAlignment="Bottom" Margin="5" Width="150" Content="Сохранить" x:Name="btnSave" Click="btnSave_Click"/>
+
+    </Grid>
+</Page>

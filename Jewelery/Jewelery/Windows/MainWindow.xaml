@@ -1,0 +1,22 @@
+﻿<Window x:Class="Jewelery.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Jewelery"
+        mc:Ignorable="d"
+        Title="Украшение" Height="600" Width="900"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="6*"/>
+        </Grid.RowDefinitions>
+
+        <Image Source="/logo.png" HorizontalAlignment="Left" Margin="10 0 0 0" Height="40" Width="40"/>
+
+        <Label x:Name="txtTitle" HorizontalAlignment="Center" Margin="20 0 0 0" Width="300"/>
+        <Frame Grid.Row="1" Name="frame" Source="/Pages/LoginPage.xaml" NavigationUIVisibility="Hidden"/>
+        <Button Width="150" Content="Назад" x:Name="btnBack" Click="btnBack_Click" HorizontalAlignment="Right" Margin="0 0 20 0"/>
+    </Grid>
+</Window>

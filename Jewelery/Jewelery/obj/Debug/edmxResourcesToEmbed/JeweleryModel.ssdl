@@ -1,0 +1,432 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище JeweleryModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Единицы_измерения">
+    <Key>
+      <PropertyRef Name="Код" />
+    </Key>
+    <Property Name="Код" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Наименование" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Заказы">
+    <Key>
+      <PropertyRef Name="Код" />
+    </Key>
+    <Property Name="Код" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Дата_заказа" Type="date" Nullable="false" />
+    <Property Name="Дата_доставки" Type="date" Nullable="false" />
+    <Property Name="Пункт_выдачи" Type="tinyint" Nullable="false" />
+    <Property Name="Код_клиента" Type="tinyint" />
+    <Property Name="Код_для_получения" Type="tinyint" Nullable="false" />
+    <Property Name="Статус_заказа" Type="tinyint" Nullable="false" />
+    <Property Name="Стоимость" Type="decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <EntityType Name="Категории">
+    <Key>
+      <PropertyRef Name="Код" />
+    </Key>
+    <Property Name="Код" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Наименование" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Пользователи">
+    <Key>
+      <PropertyRef Name="Код" />
+    </Key>
+    <Property Name="Код" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Фамилия" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Имя" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Отчество" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Логин" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Пароль" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Роль" Type="tinyint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Поставщики">
+    <Key>
+      <PropertyRef Name="Код" />
+    </Key>
+    <Property Name="Код" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Наименование" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Юрид_адрес" Type="nvarchar" MaxLength="250" />
+    <Property Name="ИНН" Type="nvarchar" MaxLength="50" />
+    <Property Name="КПП" Type="nvarchar" MaxLength="50" />
+    <Property Name="ФИО_директора" Type="nvarchar" MaxLength="250" />
+    <Property Name="Телефон" Type="nvarchar" MaxLength="20" />
+    <Property Name="Почта" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Продукция">
+    <Key>
+      <PropertyRef Name="Артикул" />
+    </Key>
+    <Property Name="Артикул" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Наименование" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Единица_измерения" Type="tinyint" Nullable="false" />
+    <Property Name="Стоимость" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Размер_максимально_возможной_скидки" Type="tinyint" Nullable="false" />
+    <Property Name="Производитель" Type="tinyint" Nullable="false" />
+    <Property Name="Поставщик" Type="tinyint" Nullable="false" />
+    <Property Name="Категория_товара" Type="tinyint" Nullable="false" />
+    <Property Name="Действующая_скидка" Type="tinyint" Nullable="false" />
+    <Property Name="Кол_во_на_складе" Type="tinyint" Nullable="false" />
+    <Property Name="Описание" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Изображение" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Производители">
+    <Key>
+      <PropertyRef Name="Код" />
+    </Key>
+    <Property Name="Код" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Наименование" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Пункты_выдачи">
+    <Key>
+      <PropertyRef Name="Код" />
+    </Key>
+    <Property Name="Код" Type="tinyint" Nullable="false" />
+    <Property Name="Индекс" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Адрес" Type="nvarchar" MaxLength="250" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Роли">
+    <Key>
+      <PropertyRef Name="Код" />
+    </Key>
+    <Property Name="Код" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Роль" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Состав_заказов">
+    <Key>
+      <PropertyRef Name="Номер" />
+    </Key>
+    <Property Name="Номер" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Номер_заказа" Type="tinyint" Nullable="false" />
+    <Property Name="Артикул_продукции" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Количество" Type="tinyint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Статусы">
+    <Key>
+      <PropertyRef Name="Код" />
+    </Key>
+    <Property Name="Код" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Наименование" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "Jewelery.dbo.VW_ProductList" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+  <EntityType Name="VW_ProductList">
+    <Key>
+      <PropertyRef Name="Артикул" />
+      <PropertyRef Name="Наименование" />
+      <PropertyRef Name="Единица_измерения" />
+      <PropertyRef Name="Стоимость" />
+      <PropertyRef Name="Размер_максимально_возможной_скидки" />
+      <PropertyRef Name="Производитель" />
+      <PropertyRef Name="Наименование_производителя" />
+      <PropertyRef Name="Поставщик" />
+      <PropertyRef Name="Наименование_поставщика" />
+      <PropertyRef Name="Категория_товара" />
+      <PropertyRef Name="Наименование_категории" />
+      <PropertyRef Name="Действующая_скидка" />
+      <PropertyRef Name="Кол_во_на_складе" />
+      <PropertyRef Name="Описание" />
+    </Key>
+    <Property Name="Артикул" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Наименование" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Единица_измерения" Type="tinyint" Nullable="false" />
+    <Property Name="Стоимость" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Размер_максимально_возможной_скидки" Type="tinyint" Nullable="false" />
+    <Property Name="Производитель" Type="tinyint" Nullable="false" />
+    <Property Name="Наименование_производителя" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Поставщик" Type="tinyint" Nullable="false" />
+    <Property Name="Наименование_поставщика" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Категория_товара" Type="tinyint" Nullable="false" />
+    <Property Name="Наименование_категории" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Действующая_скидка" Type="tinyint" Nullable="false" />
+    <Property Name="Кол_во_на_складе" Type="tinyint" Nullable="false" />
+    <Property Name="Описание" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Изображение" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "Jewelery.dbo.VW_ProdutsDetails" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+  <EntityType Name="VW_ProdutsDetails">
+    <Key>
+      <PropertyRef Name="Артикул" />
+      <PropertyRef Name="Наименование" />
+      <PropertyRef Name="Количество_на_складе" />
+      <PropertyRef Name="Стоимость" />
+      <PropertyRef Name="Максимальная_скидка" />
+      <PropertyRef Name="Действующая_скидка" />
+      <PropertyRef Name="Категория_товара" />
+    </Key>
+    <Property Name="Артикул" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Наименование" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Количество_на_складе" Type="tinyint" Nullable="false" />
+    <Property Name="Стоимость" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Максимальная_скидка" Type="tinyint" Nullable="false" />
+    <Property Name="Действующая_скидка" Type="tinyint" Nullable="false" />
+    <Property Name="Категория_товара" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Описание" Type="nvarchar" MaxLength="70" />
+  </EntityType>
+  <Association Name="FK_Заказы_Пользователи">
+    <End Role="Пользователи" Type="Self.Пользователи" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Заказы" Type="Self.Заказы" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Пользователи">
+        <PropertyRef Name="Код" />
+      </Principal>
+      <Dependent Role="Заказы">
+        <PropertyRef Name="Код_клиента" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Заказы_Пункты_выдачи">
+    <End Role="Пункты_выдачи" Type="Self.Пункты_выдачи" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Заказы" Type="Self.Заказы" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Пункты_выдачи">
+        <PropertyRef Name="Код" />
+      </Principal>
+      <Dependent Role="Заказы">
+        <PropertyRef Name="Пункт_выдачи" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Заказы_Статусы">
+    <End Role="Статусы" Type="Self.Статусы" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Заказы" Type="Self.Заказы" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Статусы">
+        <PropertyRef Name="Код" />
+      </Principal>
+      <Dependent Role="Заказы">
+        <PropertyRef Name="Статус_заказа" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Пользователи_Роли">
+    <End Role="Роли" Type="Self.Роли" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Пользователи" Type="Self.Пользователи" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Роли">
+        <PropertyRef Name="Код" />
+      </Principal>
+      <Dependent Role="Пользователи">
+        <PropertyRef Name="Роль" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Продукция_Единицы_измерения">
+    <End Role="Единицы_измерения" Type="Self.Единицы_измерения" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Продукция" Type="Self.Продукция" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Единицы_измерения">
+        <PropertyRef Name="Код" />
+      </Principal>
+      <Dependent Role="Продукция">
+        <PropertyRef Name="Единица_измерения" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Продукция_Категории">
+    <End Role="Категории" Type="Self.Категории" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Продукция" Type="Self.Продукция" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Категории">
+        <PropertyRef Name="Код" />
+      </Principal>
+      <Dependent Role="Продукция">
+        <PropertyRef Name="Категория_товара" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Продукция_Поставщики">
+    <End Role="Поставщики" Type="Self.Поставщики" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Продукция" Type="Self.Продукция" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Поставщики">
+        <PropertyRef Name="Код" />
+      </Principal>
+      <Dependent Role="Продукция">
+        <PropertyRef Name="Поставщик" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Продукция_Производители">
+    <End Role="Производители" Type="Self.Производители" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Продукция" Type="Self.Продукция" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Производители">
+        <PropertyRef Name="Код" />
+      </Principal>
+      <Dependent Role="Продукция">
+        <PropertyRef Name="Производитель" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Состав_заказов_Заказы">
+    <End Role="Заказы" Type="Self.Заказы" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Состав_заказов" Type="Self.Состав_заказов" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Заказы">
+        <PropertyRef Name="Код" />
+      </Principal>
+      <Dependent Role="Состав_заказов">
+        <PropertyRef Name="Номер_заказа" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Состав_заказов_Продукция">
+    <End Role="Продукция" Type="Self.Продукция" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Состав_заказов" Type="Self.Состав_заказов" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Продукция">
+        <PropertyRef Name="Артикул" />
+      </Principal>
+      <Dependent Role="Состав_заказов">
+        <PropertyRef Name="Артикул_продукции" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <EntityContainer Name="Хранилище JeweleryModelContainer">
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Единицы_измерения" EntityType="Self.Единицы_измерения" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Заказы" EntityType="Self.Заказы" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Категории" EntityType="Self.Категории" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Пользователи" EntityType="Self.Пользователи" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Поставщики" EntityType="Self.Поставщики" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Продукция" EntityType="Self.Продукция" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Производители" EntityType="Self.Производители" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Пункты_выдачи" EntityType="Self.Пункты_выдачи" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Роли" EntityType="Self.Роли" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Состав_заказов" EntityType="Self.Состав_заказов" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Статусы" EntityType="Self.Статусы" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VW_ProductList" EntityType="Self.VW_ProductList" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [VW_ProductList].[Артикул] AS [Артикул], 
+    [VW_ProductList].[Наименование] AS [Наименование], 
+    [VW_ProductList].[Единица_измерения] AS [Единица_измерения], 
+    [VW_ProductList].[Стоимость] AS [Стоимость], 
+    [VW_ProductList].[Размер_максимально_возможной_скидки] AS [Размер_максимально_возможной_скидки], 
+    [VW_ProductList].[Производитель] AS [Производитель], 
+    [VW_ProductList].[Наименование_производителя] AS [Наименование_производителя], 
+    [VW_ProductList].[Поставщик] AS [Поставщик], 
+    [VW_ProductList].[Наименование_поставщика] AS [Наименование_поставщика], 
+    [VW_ProductList].[Категория_товара] AS [Категория_товара], 
+    [VW_ProductList].[Наименование_категории] AS [Наименование_категории], 
+    [VW_ProductList].[Действующая_скидка] AS [Действующая_скидка], 
+    [VW_ProductList].[Кол_во_на_складе] AS [Кол_во_на_складе], 
+    [VW_ProductList].[Описание] AS [Описание], 
+    [VW_ProductList].[Изображение] AS [Изображение]
+    FROM [dbo].[VW_ProductList] AS [VW_ProductList]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="VW_ProdutsDetails" EntityType="Self.VW_ProdutsDetails" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [VW_ProdutsDetails].[Артикул] AS [Артикул], 
+    [VW_ProdutsDetails].[Наименование] AS [Наименование], 
+    [VW_ProdutsDetails].[Количество_на_складе] AS [Количество_на_складе], 
+    [VW_ProdutsDetails].[Стоимость] AS [Стоимость], 
+    [VW_ProdutsDetails].[Максимальная_скидка] AS [Максимальная_скидка], 
+    [VW_ProdutsDetails].[Действующая_скидка] AS [Действующая_скидка], 
+    [VW_ProdutsDetails].[Категория_товара] AS [Категория_товара], 
+    [VW_ProdutsDetails].[Описание] AS [Описание]
+    FROM [dbo].[VW_ProdutsDetails] AS [VW_ProdutsDetails]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_Заказы_Пользователи" Association="Self.FK_Заказы_Пользователи">
+      <End Role="Пользователи" EntitySet="Пользователи" />
+      <End Role="Заказы" EntitySet="Заказы" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Заказы_Пункты_выдачи" Association="Self.FK_Заказы_Пункты_выдачи">
+      <End Role="Пункты_выдачи" EntitySet="Пункты_выдачи" />
+      <End Role="Заказы" EntitySet="Заказы" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Заказы_Статусы" Association="Self.FK_Заказы_Статусы">
+      <End Role="Статусы" EntitySet="Статусы" />
+      <End Role="Заказы" EntitySet="Заказы" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Пользователи_Роли" Association="Self.FK_Пользователи_Роли">
+      <End Role="Роли" EntitySet="Роли" />
+      <End Role="Пользователи" EntitySet="Пользователи" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Продукция_Единицы_измерения" Association="Self.FK_Продукция_Единицы_измерения">
+      <End Role="Единицы_измерения" EntitySet="Единицы_измерения" />
+      <End Role="Продукция" EntitySet="Продукция" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Продукция_Категории" Association="Self.FK_Продукция_Категории">
+      <End Role="Категории" EntitySet="Категории" />
+      <End Role="Продукция" EntitySet="Продукция" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Продукция_Поставщики" Association="Self.FK_Продукция_Поставщики">
+      <End Role="Поставщики" EntitySet="Поставщики" />
+      <End Role="Продукция" EntitySet="Продукция" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Продукция_Производители" Association="Self.FK_Продукция_Производители">
+      <End Role="Производители" EntitySet="Производители" />
+      <End Role="Продукция" EntitySet="Продукция" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Состав_заказов_Заказы" Association="Self.FK_Состав_заказов_Заказы">
+      <End Role="Заказы" EntitySet="Заказы" />
+      <End Role="Состав_заказов" EntitySet="Состав_заказов" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Состав_заказов_Продукция" Association="Self.FK_Состав_заказов_Продукция">
+      <End Role="Продукция" EntitySet="Продукция" />
+      <End Role="Состав_заказов" EntitySet="Состав_заказов" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

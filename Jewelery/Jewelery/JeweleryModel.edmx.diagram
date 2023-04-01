@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="66607d7c8145459aacdfd932d1ae02c4" Name="Diagram1">
+        <EntityTypeShape EntityType="JeweleryModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="JeweleryModel.Единицы_измерения" Width="1.5" PointX="0.75" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="JeweleryModel.Заказы" Width="1.5" PointX="3" PointY="16.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="JeweleryModel.Категории" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="JeweleryModel.Пользователи" Width="1.5" PointX="0.75" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="JeweleryModel.Поставщики" Width="1.5" PointX="0.75" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="JeweleryModel.Продукция" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="JeweleryModel.Производители" Width="1.5" PointX="0.75" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="JeweleryModel.Пункты_выдачи" Width="1.5" PointX="0.75" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="JeweleryModel.Роли" Width="1.5" PointX="1.5" PointY="20.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="JeweleryModel.Состав_заказов" Width="1.5" PointX="5.25" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="JeweleryModel.Статусы" Width="1.5" PointX="0.75" PointY="23.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="JeweleryModel.VW_ProdutsDetails" Width="1.5" PointX="2.75" PointY="6.75" IsExpanded="true" />
+        <AssociationConnector Association="JeweleryModel.FK_Продукция_Единицы_измерения" ManuallyRouted="false" />
+        <AssociationConnector Association="JeweleryModel.FK_Заказы_Пользователи" ManuallyRouted="false" />
+        <AssociationConnector Association="JeweleryModel.FK_Заказы_Пункты_выдачи" ManuallyRouted="false" />
+        <AssociationConnector Association="JeweleryModel.FK_Заказы_Статусы" ManuallyRouted="false" />
+        <AssociationConnector Association="JeweleryModel.FK_Состав_заказов_Заказы" ManuallyRouted="false" />
+        <AssociationConnector Association="JeweleryModel.FK_Продукция_Категории" ManuallyRouted="false" />
+        <AssociationConnector Association="JeweleryModel.FK_Пользователи_Роли" ManuallyRouted="false" />
+        <AssociationConnector Association="JeweleryModel.FK_Продукция_Поставщики" ManuallyRouted="false" />
+        <AssociationConnector Association="JeweleryModel.FK_Продукция_Производители" ManuallyRouted="false" />
+        <AssociationConnector Association="JeweleryModel.FK_Состав_заказов_Продукция" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="JeweleryModel.VW_ProductList" Width="1.5" PointX="7.375" PointY="0.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
